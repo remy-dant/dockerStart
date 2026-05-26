@@ -1,13 +1,33 @@
 <?php
 // Configuration de la base de données
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'livreor');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', getenv('DB_HOST') ?: 'db');
+define('DB_NAME', getenv('DB_NAME') ?: 'livreor');
+define('DB_USER', getenv('DB_USER') ?: 'livreor_user');
+define('DB_PASS', getenv('DB_PASSWORD') ?: (getenv('DB_PASS') ?: 'change_me'));
 define('DB_CHARSET', 'utf8');
 
 // Configuration générale de l'application
-define('BASE_URL', 'http://localhost/Site/Livre-D%27OR/public/');
+$envBaseUrl = getenv('BASE_URL');
+
+if ($envBaseUrl !== false && $envBaseUrl !== '') {
+	$baseUrl = rtrim($envBaseUrl, '/') . '/';
+} else {
+	$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+	$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+	$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+
+	if ($scriptDir === '/' || $scriptDir === '.') {
+		$scriptDir = '';
+	}
+
+	if (str_ends_with($scriptDir, '/public')) {
+		$scriptDir = substr($scriptDir, 0, -7);
+	}
+
+	$baseUrl = rtrim($scheme . '://' . $host . $scriptDir, '/') . '/';
+}
+
+define('BASE_URL', $baseUrl);
 define('APP_NAME', "LIVRE D'OR");
 define('APP_VERSION', '1.0.0');
 

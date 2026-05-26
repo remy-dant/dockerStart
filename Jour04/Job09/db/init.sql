@@ -58,7 +58,7 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `login`, `password`) VALUES
-(1, 'Enzo', '$2y$10$7mqTwDiOuTld16hOw7e7f.WuCXqMS4z3njsWF7K.KkF5Kja1U.oFm');
+(1, 'DevilRyo', '$2b$10$tv5Uhi/qgl.YpNaggUapHumrkc8BYzs/ni2SEVjt5T6UR8Yc07ggC');
 
 --
 -- Indexes for dumped tables
