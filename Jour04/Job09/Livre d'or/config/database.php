@@ -1,20 +1,22 @@
 <?php
-$dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME') ?: 'livreor';
-$dbUser = getenv('DB_USER') ?: 'root';
-$dbPassword = getenv('DB_PASSWORD') ?: '';
+// Configuration de la base de données
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'livreor');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_CHARSET', 'utf8');
 
-// Configuration centrale de la base de données. Ajustez les identifiants si nécessaire.
-try {
-    $db = new PDO("mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4", $dbUser, $dbPassword);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    // En production, loggez l'erreur au lieu de l'afficher
-    die('Erreur de connexion à la base de données : ' . $e->getMessage());
-}
+// Configuration générale de l'application
+define('BASE_URL', 'http://localhost/Site/Livre-D%27OR/public/');
+define('APP_NAME', "LIVRE D'OR");
+define('APP_VERSION', '1.0.0');
 
-// Fournit aussi un alias $pdo pour compatibilité
-$pdo = $db;
-
-// Expose un chemin pratique vers le dossier database pour les imports/migrations
-define('DATABASE_DIR', __DIR__ . '/../database');
+// Configuration des chemins
+define('ROOT_PATH', dirname(__DIR__));
+define('CONFIG_PATH', ROOT_PATH . '/config');
+define('CONTROLLER_PATH', ROOT_PATH . '/controllers');
+define('MODEL_PATH', ROOT_PATH . '/models');
+define('VIEW_PATH', ROOT_PATH . '/views');
+define('INCLUDE_PATH', ROOT_PATH . '/includes');
+define('CORE_PATH', ROOT_PATH . '/core');
+define('PUBLIC_PATH', ROOT_PATH . '/public'); 

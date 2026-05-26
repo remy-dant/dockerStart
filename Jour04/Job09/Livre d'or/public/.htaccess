@@ -1,0 +1,15 @@
+# Définir index.php comme page par défaut
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Rediriger toutes les requêtes vers index.php sauf pour les fichiers existants
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Cacher les fichiers sensibles
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch> 
